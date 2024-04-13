@@ -41,6 +41,9 @@ jobs:
             cd /home/smmlove/htdocs/smmlove.pro
             git pull
             cd server
-            pm2 reload all
+            npm install
+            npm run build
             cd ../client
+            npm install
+            npm run build
             pm2 reload all
