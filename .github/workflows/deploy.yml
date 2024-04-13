@@ -39,8 +39,9 @@ jobs:
           password: ${{ secrets.VPS_PASSWORD }}
           script: |
             cd /home/smmlove/htdocs/smmlove.pro
-            source ~/.bashrc
             git pull
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
             cd server
             npm install
             npm run build
