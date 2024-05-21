@@ -19,16 +19,10 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          cd client
-          npm install
-          cd ../server
           npm install
 
       - name: Build Projects
         run: |
-          cd server
-          npm run build
-          cd ../client
           npm run build
 
       - name: Deploy to VPS
@@ -42,10 +36,6 @@ jobs:
             git pull
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
-            cd server
-            npm install
-            npm run build
-            cd ../client
             npm install
             npm run build
             pm2 reload all
