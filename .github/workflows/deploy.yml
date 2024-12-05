@@ -32,10 +32,25 @@ jobs:
           username: ${{ secrets.VPS_USERNAME }}
           password: ${{ secrets.VPS_PASSWORD }}
           script: |
+            # Перейти в папку з проектом
             cd /home/smmlove/htdocs/smmlove.pro
+
+            # Очистити папку (видаляє все, крім .git)
+            find . -mindepth 1 ! -regex '^./\.git\(/.*\)?' -delete
+
+            # Витягти останні зміни з Git
+            git reset --hard
             git pull
+
+            # Налаштувати Node.js середовище
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
+
+            # Встановити залежності
             npm install
+
+            # Зібрати проект
             npm run build
+
+            # Перезапустити додаток через PM2
             pm2 reload all
