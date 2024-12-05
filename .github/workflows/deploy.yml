@@ -36,16 +36,17 @@ jobs:
              cd /home/smmlove/htdocs/smmlove.pro
              
              # Очистити все, крім .git
-             find . -mindepth 1 ! -regex '^./\.git\(/.*\)?' -delete
+             # find . -mindepth 1 ! -regex '^./\.git\(/.*\)?' -delete
              
              # Жорстко оновити гілку main
-             git fetch --all
-             git reset --hard origin/main
+             # git fetch --all
+             # git reset --hard origin/main
+             git pull
              
              # Налаштувати Node.js середовище
              export NVM_DIR=~/.nvm
              source ~/.nvm/nvm.sh
-             
+
              # Встановити залежності
              npm install
              
@@ -53,7 +54,7 @@ jobs:
              npm run build
              
              # Перезапустити PM2
-             pm2 start app.js --name "my-app" || pm2 reload my-app
+             pm2 start npm --name "my-app" -- start || pm2 reload my-app
              
              # Зберегти PM2 процеси
              pm2 save
