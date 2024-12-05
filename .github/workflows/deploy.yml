@@ -20,40 +20,40 @@ jobs:
       - name: Install Dependencies
         run: |
           npm install
-          
+
       - name: Build Projects
         run: |
           npm run build
-          
+
       - name: Deploy to VPS
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USERNAME }}
           password: ${{ secrets.VPS_PASSWORD }}
-         script: |
+          script: |
             # Перейти в директорію проекту
-            cd /home/smmlove/htdocs/smmlove.pro
-            
-            # Очистити все, крім .git
-            find . -mindepth 1 ! -regex '^./\.git\(/.*\)?' -delete
-            
-            # Жорстко оновити гілку main
-            git fetch --all
-            git reset --hard origin/main
-            
-            # Налаштувати Node.js середовище
-            export NVM_DIR=~/.nvm
-            source ~/.nvm/nvm.sh
-            
-            # Встановити залежності
-            npm install
-            
-            # Зібрати проект
-            npm run build
-            
-            # Перезапустити PM2
-            pm2 start app.js --name "my-app" || pm2 reload my-app
-            
-            # Зберегти PM2 процеси
-            pm2 save
+             cd /home/smmlove/htdocs/smmlove.pro
+             
+             # Очистити все, крім .git
+             find . -mindepth 1 ! -regex '^./\.git\(/.*\)?' -delete
+             
+             # Жорстко оновити гілку main
+             git fetch --all
+             git reset --hard origin/main
+             
+             # Налаштувати Node.js середовище
+             export NVM_DIR=~/.nvm
+             source ~/.nvm/nvm.sh
+             
+             # Встановити залежності
+             npm install
+             
+             # Зібрати проект
+             npm run build
+             
+             # Перезапустити PM2
+             pm2 start app.js --name "my-app" || pm2 reload my-app
+             
+             # Зберегти PM2 процеси
+             pm2 save
