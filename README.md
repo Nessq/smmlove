@@ -330,35 +330,35 @@ graph TD
 
 ```mermaid
 flowchart TB
-    subgraph Публічні маршрути 
-        Login[\"/\" — Сторінка входу] 
+    subgraph Публічні маршрути
+        Login[/ - Сторінка входу]
     end
 
     subgraph Авторизовані
-        OrdersPage[\"/order\" — Замовлення]
-        FreeOrders[\"/free-orders\" — Безкоштовні замовлення]
-        Products[\"/products\" — Продукти]
-        Balance[\"/balance\" — Баланс]
-        UserSettings[\"/user/settings\" — Налаштування користувача]
-        Transactions[\"/transactions\" — Транзакції]
+        OrdersPage[/order - Замовлення]
+        FreeOrders[/free-orders - Безкоштовні замовлення]
+        Products[/products - Продукти]
+        Balance[/balance - Баланс]
+        UserSettings[/user/settings - Налаштування користувача]
+        Transactions[/transactions - Транзакції]
     end
 
     subgraph Менеджери + Адміністратори
-        ServiceStat[\"/service-stat\" — Моніторинг сервісів]
-        ServiceHistory[\"/service-stat-history\" — Історія змін]
+        ServiceStat[/service-stat - Моніторинг сервісів]
+        ServiceHistory[/service-stat-history - Історія змін]
     end
 
     subgraph Тільки адміністратори
-        Statistics[\"/statistics\" — Статистика]
-        GeneralSettings[\"/settings/general\" — Загальні налаштування]
-        ApiProviders[\"/settings/apies\" — API постачальники]
-        OrderStatuses[\"/settings/order-statuses\" — Статуси]
-        Currencies[\"/settings/currencies\" — Валюти]
-        Sites[\"/settings/sites\" — Сайти]
-        SiteGroups[\"/settings/site-groups\" — Групи]
-        Users[\"/users/list\" — Користувачі]
-        SupplierMapping[\"/settings/supplier\" — Співставлення API]
-        FreeOrderSettings[\"/settings/free-orders\" — Безкоштовні замовлення]
+        Statistics[/statistics - Статистика]
+        GeneralSettings[/settings/general - Загальні налаштування]
+        ApiProviders[/settings/apies - API постачальники]
+        OrderStatuses[/settings/order-statuses - Статуси]
+        Currencies[/settings/currencies - Валюти]
+        Sites[/settings/sites - Сайти]
+        SiteGroups[/settings/site-groups - Групи]
+        Users[/users/list - Користувачі]
+        SupplierMapping[/settings/supplier - Співставлення API]
+        FreeOrderSettings[/settings/free-orders - Безкоштовні замовлення]
     end
 
     Login --> OrdersPage
