@@ -10,41 +10,41 @@
 
 ```mermaid
 graph TB
-    subgraph "Frontend Layer"
-        UI[Web Interface<br/>Bootstrap 5 + jQuery]
-        API_UI[API Endpoints]
+    subgraph "Фронтенд"
+        UI[Веб-інтерфейс<br/>Bootstrap 5 + jQuery]
+        API_UI[API Ендпоінти]
     end
-    
-    subgraph "Application Layer"
-        Controllers[Controllers]
-        Middleware[Middleware<br/>Auth, Roles, CORS]
-        Services[Services<br/>SiteAccess, Telegram]
+
+    subgraph "Рівень додатка"
+        Controllers[Контролери]
+        Middleware[Проміжне ПЗ<br/>Auth, Roles, CORS]
+        Services[Сервіси<br/>SiteAccess, Telegram]
     end
-    
-    subgraph "Business Logic"
-        Models[Eloquent Models]
-        Jobs[Queue Jobs<br/>ProcessOrder, ProcessFreeOrder]
-        Events[Events & Listeners]
+
+    subgraph "Бізнес-логіка"
+        Models[Eloquent Моделі]
+        Jobs[Черги<br/>ProcessOrder, ProcessFreeOrder]
+        Events[Події та Слухачі]
     end
-    
-    subgraph "Data Layer"
-        MySQL[(MySQL Database)]
-        Files[File Storage<br/>Icons, Logs]
+
+    subgraph "Дані"
+        MySQL[(БД MySQL)]
+        Files[Файлове сховище<br/>Іконки, логи]
     end
-    
-    subgraph "External Systems"
-        WP[WordPress Sites<br/>REST API]
-        Suppliers[API Providers<br/>External Services]
+
+    subgraph "Зовнішні системи"
+        WP[Сайти WordPress<br/>REST API]
+        Suppliers[API Постачальників]
         Mono[Monobank API]
         TG[Telegram Bot]
     end
-    
-    subgraph "Infrastructure"
-        Cron[Cron Jobs<br/>Laravel Scheduler]
-        Queue[Queue System<br/>Redis/Database]
-        WebSocket[WebSocket Server<br/>Real-time updates]
+
+    subgraph "Інфраструктура"
+        Cron[Крон-задачі<br/>Laravel Scheduler]
+        Queue[Система черг<br/>Redis / БД]
+        WebSocket[WebSocket сервер<br/>Оновлення в реальному часі]
     end
-    
+
     UI --> Controllers
     API_UI --> Controllers
     Controllers --> Middleware
@@ -287,17 +287,17 @@ erDiagram
 ```mermaid
 graph TD
     subgraph "Ролі користувачів"
-        Admin[Administrator<br/>- Повний доступ<br/>- Налаштування системи<br/>- Управління користувачами]
-        Manager[Manager<br/>- Управління сервісами<br/>- Перегляд статистики<br/>- Обмежений доступ]
-        User[User<br/>- Замовлення<br/>- Продукти<br/>- Баланси]
+        Admin[Адміністратор<br/>- Повний доступ<br/>- Налаштування системи<br/>- Користувачі]
+        Manager[Менеджер<br/>- Управління сервісами<br/>- Статистика]
+        User[Користувач<br/>- Замовлення<br/>- Продукти<br/>- Баланс]
     end
-    
+
     subgraph "Контроль доступу"
-        SiteAccess[Site Access Control<br/>user_site_access]
-        SiteGroups[Site Groups<br/>Проекти]
-        DynamicAccess[Dynamic Access<br/>SiteAccessService]
+        SiteAccess[Контроль доступу<br/>user_site_access]
+        SiteGroups[Групи сайтів]
+        DynamicAccess[Динамічний доступ<br/>SiteAccessService]
     end
-    
+
     subgraph "Ресурси"
         Sites[Сайти]
         Orders[Замовлення]
@@ -306,7 +306,7 @@ graph TD
         Stats[Статистика]
         Settings[Налаштування]
     end
-    
+
     Admin --> Settings
     Admin --> Stats
     Admin --> SiteGroups
@@ -315,7 +315,7 @@ graph TD
     User --> Orders
     User --> Products
     User --> Balance
-    
+
     SiteAccess --> Sites
     SiteGroups --> Sites
     DynamicAccess --> SiteAccess
@@ -329,38 +329,38 @@ graph TD
 ## 🌐 Структура сторінок та маршрутизація
 
 ```mermaid
-graph TB
-    subgraph "Публічні маршрути"
-        Login[/ - Login Page]
+flowchart TB
+    subgraph Публічні маршрути
+        Login[\"/\" — Сторінка входу]
     end
-    
-    subgraph "Авторизовані користувачі"
-        OrdersPage[/order - Управління замовленнями]
-        FreeOrders[/free-orders - Безкоштовні замовлення]
-        Products[/products - Продукти]
-        Balance[/balance - Гаманці]
-        UserSettings[/user/settings - Налаштування користувача]
-        Transactions[/transactions - Транзакції]
+
+    subgraph Авторизовані
+        OrdersPage[\"/order\" — Замовлення]
+        FreeOrders[\"/free-orders\" — Безкоштовні замовлення]
+        Products[\"/products\" — Продукти]
+        Balance[\"/balance\" — Баланс]
+        UserSettings[\"/user/settings\" — Налаштування користувача]
+        Transactions[\"/transactions\" — Транзакції]
     end
-    
-    subgraph "Менеджери + Адміністратори"
-        ServiceStat[/service-stat - Моніторинг сервісів]
-        ServiceHistory[/service-stat-history - Історія змін]
+
+    subgraph Менеджери + Адміністратори
+        ServiceStat[\"/service-stat\" — Моніторинг сервісів]
+        ServiceHistory[\"/service-stat-history\" — Історія змін]
     end
-    
-    subgraph "Тільки адміністратори"
-        Statistics[/statistics - Статистика]
-        GeneralSettings[/settings/general - Загальні налаштування]
-        ApiProviders[/settings/apies - API постачальники]
-        OrderStatuses[/settings/order-statuses - Статуси замовлень]
-        Currencies[/settings/currencies - Валюти]
-        Sites[/settings/sites - Сайти]
-        SiteGroups[/settings/site-groups - Проекти]
-        Users[/users/list - Користувачі]
-        SupplierMapping[/settings/supplier - Співставлення API]
-        FreeOrderSettings[/settings/free-orders - Налаштування безкоштовних замовлень]
+
+    subgraph Тільки адміністратори
+        Statistics[\"/statistics\" — Статистика]
+        GeneralSettings[\"/settings/general\" — Загальні налаштування]
+        ApiProviders[\"/settings/apies\" — API постачальники]
+        OrderStatuses[\"/settings/order-statuses\" — Статуси]
+        Currencies[\"/settings/currencies\" — Валюти]
+        Sites[\"/settings/sites\" — Сайти]
+        SiteGroups[\"/settings/site-groups\" — Групи]
+        Users[\"/users/list\" — Користувачі]
+        SupplierMapping[\"/settings/supplier\" — Співставлення API]
+        FreeOrderSettings[\"/settings/free-orders\" — Безкоштовні замовлення]
     end
-    
+
     Login --> OrdersPage
     OrdersPage --> FreeOrders
     OrdersPage --> Products
@@ -387,37 +387,37 @@ graph TB
 
 ```mermaid
 sequenceDiagram
-    participant WP as WordPress Site
+    participant WP as Сайт WordPress
     participant API as CRM API
-    participant DB as Database
-    participant Queue as Queue System
-    participant Provider as API Provider
+    participant DB as База даних
+    participant Queue as Система черг
+    participant Provider as Постачальник
     participant TG as Telegram
-    
+
     WP->>API: POST /api/v1/createOrder
-    API->>DB: Validate & Create Order
-    API->>DB: Check suspicious email
-    
-    alt Suspicious Email
-        API->>DB: Set status to 'pending'
-        API->>TG: Send suspicious email notification
-    else Normal Order
-        API->>DB: Set status to 'launching'
-        API->>Queue: Dispatch ProcessOrder Job
+    API->>DB: Валідація + створення замовлення
+    API->>DB: Перевірка email
+
+    alt Підозрілий email
+        API->>DB: Статус — 'pending'
+        API->>TG: Повідомлення в Telegram
+    else Звичайне замовлення
+        API->>DB: Статус — 'launching'
+        API->>Queue: Dispatch ProcessOrder
     end
-    
-    Queue->>Provider: Send order to supplier
-    
-    alt Success Response
-        Provider->>Queue: Return order number
-        Queue->>DB: Update status to 'executing'
-    else Error Response
-        Provider->>Queue: Return error
-        Queue->>DB: Update status to 'notexepted'
-        Queue->>TG: Send error notification
+
+    Queue->>Provider: Відправка до постачальника
+
+    alt Успіх
+        Provider->>Queue: Order ID
+        Queue->>DB: Статус — 'executing'
+    else Помилка
+        Provider->>Queue: Error
+        Queue->>DB: Статус — 'notaccepted'
+        Queue->>TG: Повідомлення про помилку
     end
-    
-    API->>WP: Return response
+
+    API->>WP: Response
 ```
 
 ---
@@ -426,26 +426,26 @@ sequenceDiagram
 
 ```mermaid
 gantt
-    title Cron Jobs Schedule
+    title Розклад Cron-завдань
     dateFormat HH:mm
     axisFormat %H:%M
-    
-    section Every 2 minutes
-    Process Orders     :active, proc1, 00:00, 00:02
-    Check Waiting Status :active, wait1, 00:00, 00:02
-    Check Notexcepted   :active, note1, 00:00, 00:02
-    
-    section Every 10 minutes
-    Check API Balance   :active, bal1, 00:00, 00:10
-    
-    section Every 30 minutes
-    Rotate Mono Keys    :active, mono1, 00:00, 00:30
-    
-    section Every Hour
-    Update Currencies   :active, curr1, 00:00, 01:00
-    
-    section Every 6 hours
-    Update Services     :active, serv1, 00:00, 06:00
+
+    section Кожні 2 хв
+    Обробка замовлень :active, proc1, 00:00, 00:02
+    Очікування статусів :active, wait1, 00:00, 00:02
+    Обробка помилок :active, note1, 00:00, 00:02
+
+    section Кожні 10 хв
+    Баланс API :active, bal1, 00:00, 00:10
+
+    section Кожні 30 хв
+    Ротація ключів Mono :active, mono1, 00:00, 00:30
+
+    section Кожну годину
+    Курси валют :active, curr1, 00:00, 01:00
+
+    section Кожні 6 годин
+    Оновлення сервісів :active, serv1, 00:00, 06:00
 ```
 
 ---
@@ -454,38 +454,38 @@ gantt
 
 ```mermaid
 graph LR
-    subgraph "SMG CRM"
-        CRM[CRM System]
+    subgraph CRM
+        CRM[CRM Система]
     end
-    
-    subgraph "WordPress Sites"
-        WP1[Site 1<br/>WordPress]
-        WP2[Site 2<br/>WordPress]
-        WP3[Site N<br/>WordPress]
+
+    subgraph Сайти
+        WP1[WordPress Сайт 1]
+        WP2[WordPress Сайт 2]
+        WP3[WordPress Сайт N]
     end
-    
-    subgraph "External APIs"
-        Supplier1[Supplier API 1]
-        Supplier2[Supplier API 2]
+
+    subgraph API зовнішні
+        Supplier1[Постачальник 1]
+        Supplier2[Постачальник 2]
         Mono[Monobank API]
-        TG[Telegram API]
+        TG[Telegram Bot API]
     end
-    
-    subgraph "WordPress API Endpoints"
-        GetServices[/wp-json/smgcrm/v1/get-services/]
+
+    subgraph WP API
+        GetServices[/wp-json/smgcrm/v1/get-services]
         GetProducts[/wp-json/smgcrm/v1/get-products]
-        GetBalance[/wp-json/smgcrm/v1/get-user-balance/]
-        SetBalance[/wp-json/smgcrm/v1/set-user-balance/]
+        GetBalance[/wp-json/smgcrm/v1/get-user-balance]
+        SetBalance[/wp-json/smgcrm/v1/set-user-balance]
         UpdateMono[/wp-json/smgcrm/v1/update-mono-api-key]
     end
-    
-    subgraph "CRM API Endpoints"
+
+    subgraph CRM API
         CreateOrder[/api/v1/createOrder]
         MonoGetKey[/api/v1/mono/get-api-key]
         MonoUpdateKey[/api/v1/mono/update-api-key]
         CreateFreeOrder[/api/v1/free-orders/create]
     end
-    
+
     CRM <--> WP1
     CRM <--> WP2
     CRM <--> WP3
@@ -493,13 +493,13 @@ graph LR
     CRM --> Supplier2
     CRM <--> Mono
     CRM --> TG
-    
+
     WP1 --> GetServices
     WP1 --> GetProducts
     WP1 --> GetBalance
     WP1 --> SetBalance
     WP1 --> UpdateMono
-    
+
     CRM --> CreateOrder
     CRM --> MonoGetKey
     CRM --> MonoUpdateKey
@@ -546,33 +546,33 @@ flowchart TD
 
 ```mermaid
 sequenceDiagram
-    participant Cron as Cron Job
-    participant CRM as CRM System
-    participant WP as WordPress Sites
-    participant API as Supplier APIs
+    participant Cron as Крон
+    participant CRM as CRM Система
+    participant WP as WordPress Сайти
+    participant API as API Постачальників
     participant TG as Telegram
-    participant DB as Database
-    
-    Cron->>CRM: Every 6 hours: service:update
-    CRM->>WP: GET /wp-json/smgcrm/v1/get-services/
-    WP->>CRM: Return services list
-    
-    CRM->>DB: Update/Create service_stat records
-    CRM->>API: Request current prices
-    API->>CRM: Return price data
-    
-    CRM->>DB: Compare with previous prices
-    
-    alt Price Changed
-        CRM->>DB: Mark as is_changed
-        CRM->>DB: Insert into service_stat_history
-        CRM->>TG: Send price change notification
+    participant DB as БД
+
+    Cron->>CRM: Запуск кожні 6 год
+    CRM->>WP: GET /get-services
+    WP->>CRM: Список сервісів
+
+    CRM->>DB: Оновлення service_stat
+    CRM->>API: Отримати ціни
+    API->>CRM: Дані цін
+
+    CRM->>DB: Порівняння
+
+    alt Ціна змінилась
+        CRM->>DB: Помітити is_changed
+        CRM->>DB: Додати в історію
+        CRM->>TG: Повідомлення
     end
-    
-    alt Service Not Available
-        CRM->>DB: Mark as is_not_service
-        CRM->>DB: Insert into service_stat_history
-        CRM->>TG: Send unavailable service notification
+
+    alt Сервіс недоступний
+        CRM->>DB: Помітити is_not_service
+        CRM->>DB: Додати в історію
+        CRM->>TG: Повідомлення
     end
 ```
 
