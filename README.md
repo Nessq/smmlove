@@ -454,36 +454,36 @@ gantt
 
 ```mermaid
 graph LR
-    subgraph CRM
-        CRM[CRM Система]
+    subgraph "CRM"
+        CRM["CRM Система"]
     end
 
-    subgraph Сайти
-        WP1[WordPress Сайт 1]
-        WP2[WordPress Сайт 2]
-        WP3[WordPress Сайт N]
+    subgraph "Сайти"
+        WP1["WordPress Сайт 1"]
+        WP2["WordPress Сайт 2"]
+        WP3["WordPress Сайт N"]
     end
 
-    subgraph API зовнішні
-        Supplier1[Постачальник 1]
-        Supplier2[Постачальник 2]
-        Mono[Monobank API]
-        TG[Telegram Bot API]
+    subgraph "API зовнішні"
+        Supplier1["Постачальник 1"]
+        Supplier2["Постачальник 2"]
+        Mono["Monobank API"]
+        TG["Telegram Bot API"]
     end
 
-    subgraph WP API
-        GetServices[/wp-json/smgcrm/v1/get-services]
-        GetProducts[/wp-json/smgcrm/v1/get-products]
-        GetBalance[/wp-json/smgcrm/v1/get-user-balance]
-        SetBalance[/wp-json/smgcrm/v1/set-user-balance]
-        UpdateMono[/wp-json/smgcrm/v1/update-mono-api-key]
+    subgraph "WP API"
+        GetServices["/wp-json/smgcrm/v1/get-services"]
+        GetProducts["/wp-json/smgcrm/v1/get-products"]
+        GetBalance["/wp-json/smgcrm/v1/get-user-balance"]
+        SetBalance["/wp-json/smgcrm/v1/set-user-balance"]
+        UpdateMono["/wp-json/smgcrm/v1/update-mono-api-key"]
     end
 
-    subgraph CRM API
-        CreateOrder[/api/v1/createOrder]
-        MonoGetKey[/api/v1/mono/get-api-key]
-        MonoUpdateKey[/api/v1/mono/update-api-key]
-        CreateFreeOrder[/api/v1/free-orders/create]
+    subgraph "CRM API"
+        CreateOrder["/api/v1/createOrder"]
+        MonoGetKey["/api/v1/mono/get-api-key"]
+        MonoUpdateKey["/api/v1/mono/update-api-key"]
+        CreateFreeOrder["/api/v1/free-orders/create"]
     end
 
     CRM <--> WP1
