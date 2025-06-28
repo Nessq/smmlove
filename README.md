@@ -455,7 +455,7 @@ gantt
 ```mermaid
 graph LR
     subgraph "CRM"
-        CRM["CRM Система"]
+        CRMNode["CRM Система"]
     end
 
     subgraph "Сайти"
@@ -486,13 +486,13 @@ graph LR
         CreateFreeOrder["/api/v1/free-orders/create"]
     end
 
-    CRM <--> WP1
-    CRM <--> WP2
-    CRM <--> WP3
-    CRM --> Supplier1
-    CRM --> Supplier2
-    CRM <--> Mono
-    CRM --> TG
+    CRMNode <--> WP1
+    CRMNode <--> WP2
+    CRMNode <--> WP3
+    CRMNode --> Supplier1
+    CRMNode --> Supplier2
+    CRMNode <--> Mono
+    CRMNode --> TG
 
     WP1 --> GetServices
     WP1 --> GetProducts
@@ -500,10 +500,10 @@ graph LR
     WP1 --> SetBalance
     WP1 --> UpdateMono
 
-    CRM --> CreateOrder
-    CRM --> MonoGetKey
-    CRM --> MonoUpdateKey
-    CRM --> CreateFreeOrder
+    CRMNode --> CreateOrder
+    CRMNode --> MonoGetKey
+    CRMNode --> MonoUpdateKey
+    CRMNode --> CreateFreeOrder
 ```
 
 ---
