@@ -331,7 +331,7 @@ graph TD
 ```mermaid
 flowchart TB
     subgraph Публічні маршрути
-        Login[\"/\" — Сторінка входу]
+        Login[\"\/\" — Сторінка входу]
     end
 
     subgraph Авторизовані
